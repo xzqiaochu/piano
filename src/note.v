@@ -62,7 +62,7 @@ always @(posedge clk_theta or posedge rst) begin
 		end
 		
 		if (theta == 0) // 满一周期，更新振幅
-			a = (a * 1022) >> 10; // (1022/1024)^400 = 0.46 即400个周期后衰减为46%
+			a = (a * 1020) >> 10; // (1022/1024)^400 = 0.46 即400个周期后衰减为46%
 	end
 	else
 		am = 1'b0;

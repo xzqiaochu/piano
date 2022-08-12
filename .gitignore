@@ -1,4 +1,6 @@
 /*
 !/.gitignore
-!/src
 !README.md
+!/src/
+/src/python/mid/
+*.mem

@@ -1,7 +1,7 @@
 module main
 #(
 parameter PCLK_FREQ = 12_000_000,
-parameter PLLX = 10
+parameter PLLCLK_FREQ = 120_000_000
 )
 (
 input wire pclk, // 晶振，12MHz
@@ -15,7 +15,6 @@ output wire [8:0] seg1, // 数码管1输出
 output wire [8:0] seg2 // 数码管2输出
 );
 
-localparam PLLCLK_FREQ = PCLK_FREQ * PLLX;
 wire pllclk;
 pll pll_u (.CLKI(pclk), .CLKOP(pllclk));
 
@@ -28,7 +27,8 @@ assign speaker = switch ? wave : 1'b0;
 wire clk_msg;
 wire [7:0] msg;
 reg [7:0] noteid;
-keyboard #(.CLK_FREQ(PCLK_FREQ)) keyboard_u (pclk, rst, key, pitch, clk_msg, msg);
+//keyboard #(.CLK_FREQ(PCLK_FREQ)) keyboard_u (pclk, rst, key, pitch, clk_msg, msg);
+autoplay #(.CLK_FREQ(PLLCLK_FREQ)) autoplay_u (pllclk, rst, 1'b1, clk_msg, msg);
 player #(.CLK_FREQ(PLLCLK_FREQ)) player_u (pllclk, rst, clk_msg, msg, wave);
 segment segment_u (noteid, seg1, seg2);
 
