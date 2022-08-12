@@ -27,9 +27,18 @@ assign speaker = switch ? wave : 1'b0;
 
 wire clk_msg;
 wire [7:0] msg;
-wire [7:0] noteid = msg[7:7] ? msg[6:0] : 8'b0;
+reg [7:0] noteid;
 keyboard #(.CLK_FREQ(PCLK_FREQ)) keyboard_u (pclk, rst, key, pitch, clk_msg, msg);
 player #(.CLK_FREQ(PLLCLK_FREQ)) player_u (pllclk, rst, clk_msg, msg, wave);
 segment segment_u (noteid, seg1, seg2);
+
+always @(posedge clk_msg or posedge rst) begin
+    if (rst)
+        noteid = 1'b0;
+    else begin
+        if (msg[7:7])
+            noteid = msg[6:0];
+    end
+end
 
 endmodule
