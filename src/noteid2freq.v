@@ -1,8 +1,49 @@
-localparam NOTEID_OFFSET = 48;
-localparam NOTEID_LEN = 37;
-
-localparam [0:NOTEID_LEN*16-1] NOTEID2FREQ = {
-16'd131, 16'd139, 16'd147, 16'd156, 16'd165, 16'd175, 16'd185, 16'd196, 16'd208, 16'd220, 16'd233, 16'd247, 
-16'd262, 16'd277, 16'd294, 16'd311, 16'd330, 16'd349, 16'd370, 16'd392, 16'd415, 16'd440, 16'd466, 16'd494,
-16'd523, 16'd554, 16'd587, 16'd622, 16'd659, 16'd698, 16'd740, 16'd784, 16'd831, 16'd880, 16'd932, 16'd988,
-16'd1047};
+module noteid2freq(input wire clk,
+                   input wire rst,
+                   input wire [7:0] noteid,
+                   output reg [15:0] freq = 1'b0);
+    
+    localparam C0X1024    = 8372;
+    localparam RATIOX1024 = 1085;
+    
+    reg [7:0] last_noteid  = 1'b0;
+    reg [7:0] noteid_cache = 1'b0;
+    reg [31:0] freq_cache  = 1'b0;
+    reg [15:0] i           = 1'b0;
+    
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            freq         = 1'b0;
+            last_noteid  = 1'b0;
+            noteid_cache = 1'b0;
+            freq_cache   = 1'b0;
+            i            = 1'b0;
+        end
+        else begin
+            if (i == 1'b0) begin
+                if (noteid != last_noteid) begin
+                    if (noteid == 0)
+                        freq = 1'b0;
+                    else begin
+                        noteid_cache = noteid;
+                        freq_cache   = C0X1024;
+                        i            = 1'b1;
+                    end
+                    last_noteid = noteid;
+                end
+            end
+            else
+            begin
+                if (i <= noteid_cache) begin
+                    freq_cache = (freq_cache * RATIOX1024) >> 10;
+                    i          = i + 1'b1;
+                end
+                else begin
+                    freq = freq_cache >> 10;
+                    i    = 1'b0;
+                end
+            end
+        end
+    end
+    
+endmodule

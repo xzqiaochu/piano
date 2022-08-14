@@ -27,8 +27,8 @@ assign speaker = switch ? wave : 1'b0;
 wire clk_msg;
 wire [7:0] msg;
 reg [7:0] noteid;
-//keyboard #(.CLK_FREQ(PCLK_FREQ)) keyboard_u (pclk, rst, key, pitch, clk_msg, msg);
-autoplay #(.CLK_FREQ(PLLCLK_FREQ)) autoplay_u (pllclk, rst, 1'b1, clk_msg, msg);
+keyboard #(.CLK_FREQ(PCLK_FREQ)) keyboard_u (pclk, rst, key, pitch, clk_msg, msg);
+//autoplay #(.CLK_FREQ(PLLCLK_FREQ)) autoplay_u (pllclk, rst, 1'b1, clk_msg, msg);
 player #(.CLK_FREQ(PLLCLK_FREQ)) player_u (pllclk, rst, clk_msg, msg, wave);
 segment segment_u (noteid, seg1, seg2);
 

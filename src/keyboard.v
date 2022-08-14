@@ -2,7 +2,7 @@ module keyboard
 #(
 parameter CLK_FREQ = 120_000_000, 
 parameter MIN_SHIFT = 3,
-parameter MAX_SHIFT = 5,
+parameter MAX_SHIFT = 6,
 parameter SCAN_FREQ = 100
 )
 (
