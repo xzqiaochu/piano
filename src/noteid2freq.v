@@ -1,3 +1,4 @@
+// 计算公式参考：https://www.jianshu.com/p/8f40844a6ff3
 module noteid2freq(input wire clk,
                    input wire rst,
                    input wire [7:0] noteid,
