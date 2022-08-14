@@ -1,6 +1,7 @@
 /*
 !/.gitignore
 !README.md
+!/piano.lpf
 !/src/
 /src/python/mid/
 *.mem
