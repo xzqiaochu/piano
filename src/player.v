@@ -1,7 +1,7 @@
 module player
 #(
 parameter CLK_FREQ = 120_000_000,
-parameter PLAYER_NUM = 1,
+parameter PLAYER_NUM = 2,
 parameter PWM_FREQ = 500_000,
 parameter THETA_WIDTH = 8,
 parameter AM_WIDTH = 8

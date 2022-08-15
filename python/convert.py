@@ -1,8 +1,8 @@
 import mido
 
 MEM_FILE = "./src/music.mem"
-mid = mido.MidiFile("./src/python/mid/我和我的祖国.mid", clip=True)
-select_track = 1
+mid = mido.MidiFile("./python/mid/always_with_me.mid", clip=True)
+select_track = 2
 
 ticks_per_beat = 0
 us_per_beat = 0

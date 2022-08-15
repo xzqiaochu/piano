@@ -3,5 +3,6 @@
 !README.md
 !/piano.lpf
 !/src/
-/src/python/mid/
 *.mem
+!/python/
+/python/mid/

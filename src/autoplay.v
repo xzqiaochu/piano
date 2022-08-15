@@ -1,6 +1,6 @@
 module autoplay #(parameter CLK_FREQ = 120_000_000,
-                  parameter MUSIC_LEN = 428,
-                  parameter MS_PER_BEATX64 = 10)
+                  parameter MUSIC_LEN = 1394,
+                  parameter MS_PER_BEATX64 = 9)
                  (input wire clk,
                   input wire rst,
                   input wire en,
@@ -14,7 +14,7 @@ module autoplay #(parameter CLK_FREQ = 120_000_000,
     initial $readmemh("music.mem", music);
     reg [1:0] sta = 2'b00;
     reg [15:0] ms = 1'b0;
-    reg [7:0] i = 1'b0;
+    reg [15:0] i = 1'b0;
 
     clkdiv clkdiv_u (clk, rst, CLK_FREQ / 1000, clk_1khz); // 1kHz
     
