@@ -18,7 +18,7 @@ main #(.PCLK_FREQ(10_000_000)) main_u (pclk, rst_n, key, pitch, switch, buzzer, 
 
 defparam main_u.keyboard_u.SCAN_FREQ = 10_000;
 
-initial pclk = 1'b0;
+initial pclk    = 1'b0;
 always #50 pclk = ~pclk;
 
 initial begin
@@ -28,9 +28,9 @@ initial begin
 end
 
 initial begin
-    key = 13'b1_111_111_111_111;
-    pitch = 2'b11;
-    switch = 1'b1;
+    key     = 13'b1_111_111_111_111;
+    pitch   = 2'b11;
+    switch  = 1'b1;
     //@(rst == 1'b1);
     #100000; // 0.1ms
     key[0] = 1'b0;
