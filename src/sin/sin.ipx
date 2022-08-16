@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DiamondModule name="sin" module="sin" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2022 08 10 20:14:40.843" version="1.6" type="Module" synthesis="lse" source_format="Verilog HDL">
-  <Package>
-		<File name="sin.lpc" type="lpc" modified="2022 08 10 20:14:39.849"/>
-		<File name="sin.v" type="top_level_verilog" modified="2022 08 10 20:14:39.884"/>
-		<File name="sin_tmpl.v" type="template_verilog" modified="2022 08 10 20:14:39.884"/>
-		<File name="tb_sin_tmpl.v" type="testbench_verilog" modified="2022 08 10 20:14:39.885"/>
-  </Package>
-</DiamondModule>
