@@ -1,5 +1,5 @@
 module player #(parameter CLK_FREQ = 120_000_000,
-                parameter PLAYER_NUM = 2,
+                parameter PLAYER_NUM = 3,
                 parameter PWM_FREQ = 500_000,
                 parameter THETA_WIDTH = 8,
                 parameter AM_WIDTH = 8)
@@ -12,6 +12,8 @@ module player #(parameter CLK_FREQ = 120_000_000,
     integer i;
     
     /**************************************** wire变量 ****************************************/
+    wire [THETA_WIDTH*PLAYER_NUM-1:0] dds_theta;
+    wire [AM_WIDTH*PLAYER_NUM-1:0] dds_am;
     wire signed [AM_WIDTH-1:0] ams [PLAYER_NUM-1:0];
     reg signed [31:0] am_sum; // [notice] am在整合ams的时候，采取先加和再除的逻辑（目的是节省逻辑门），但如果AM_WIDTH过大，可能会溢出的风险
     wire [7:0] am;
@@ -24,17 +26,17 @@ module player #(parameter CLK_FREQ = 120_000_000,
     reg [PLAYER_NUM-1:0] handle_i; // 实际上log2(PLAYER_NUM)的位宽就足够了，但FPGA里不方便写log运算，就用PLAYER_NUM肯定??
     reg [7:0] noteids [PLAYER_NUM-1:0];
     initial begin
-        for (i = 0; i<PLAYER_NUM; i = i+1)
+        for (i=0; i<PLAYER_NUM; i=i+1)
             noteids[i] <= 8'b0;
     end
     
     
     /**************************************** 子模块实例化 ****************************************/
+    dds dds_u (dds_theta, dds_am);
     genvar g;
     generate
-    for(g = 0; g<PLAYER_NUM; g = g+1) begin
-        note #(.CLK_FREQ(CLK_FREQ)) note_u (clk, rst, noteids[g], ams[g]);
-    end
+    for(g=0; g<PLAYER_NUM; g=g+1)
+        note #(.CLK_FREQ(CLK_FREQ)) note_u (clk, rst, noteids[g], dds_am[AM_WIDTH*g+:AM_WIDTH], dds_theta[THETA_WIDTH*g+:THETA_WIDTH], ams[g]);
     endgenerate
     div div_u (clk, rst, am_sum, PLAYER_NUM, am);
     dac #(.CLK_FREQ(CLK_FREQ)) dac_u (clk, rst, am, wave);
