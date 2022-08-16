@@ -20,7 +20,7 @@ module keyboard #(parameter CLK_FREQ = 120_000_000,
     reg [7:0] scan_i        = 1'b0; // 扫描第几个按键（状态机）
     reg [12:0] key_last_sta = 13'b1_111_111_111_111; // 保存上一次按键状态，低电平有效
     
-    reg [7:0] shift          = 4; // 第几个八度
+    reg [4:0] shift          = 5'd4; // 第几个八度
     reg [1:0] pitch_last_sta = 2'b11;
     
     
@@ -68,7 +68,7 @@ module keyboard #(parameter CLK_FREQ = 120_000_000,
     // 升降音键扫描
     always @(posedge clk_scan or posedge rst) begin
         if (rst) begin
-            shift          = 4;
+            shift          = 5'd4;
             pitch_last_sta = 2'b11;
         end
         else begin
