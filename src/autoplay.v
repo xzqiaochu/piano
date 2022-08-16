@@ -10,7 +10,7 @@ module autoplay #(parameter CLK_FREQ = 120_000_000,
     wire clk_1khz;
     wire clk_play = en ? clk_1khz : 1'b0;
     
-    reg [15:0] music [MUSIC_LEN-1:0];
+    reg [15:0] music [0:MUSIC_LEN-1];
     initial $readmemh("music.mem", music);
     reg [1:0] sta = 2'b00;
     reg [15:0] ms = 1'b0;

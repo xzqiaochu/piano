@@ -4,7 +4,7 @@ module dds #(parameter PLAYER_NUM = 3,
             (input wire [THETA_WIDTH*PLAYER_NUM-1:0] theta,
              output wire [AM_WIDTH*PLAYER_NUM-1:0] am);
     
-    reg [AM_WIDTH-1:0] dds [(1<<THETA_WIDTH)-1:0];
+    reg [AM_WIDTH-1:0] dds [0:(1<<THETA_WIDTH)-1];
     initial $readmemh("dds.mem", dds);
     
     genvar i;
