@@ -22,7 +22,7 @@ def getTime():
             us_per_beat = msg.tempo
             break
 
-def tick0s2ms(ticks):
+def ticks2ms(ticks):
     global ticks_per_beat, us_per_beat
     return int(round(ticks / ticks_per_beat * us_per_beat / 1000))
 
