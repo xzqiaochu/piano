@@ -1,5 +1,5 @@
 module clkdiv (input wire clk,             // input clock
-               input wire rst,             // active low
+               input wire rst,             // active high
                input wire [31:0] divx,
                output reg clk_out = 1'b0); // clock output
     

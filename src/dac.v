@@ -2,7 +2,7 @@ module dac #(parameter CLK_FREQ = 120_000_000,
              parameter AM_WIDTH = 8,
              parameter PWM_FREQ = 500_000)
             (input wire clk,                   // input clock
-             input wire rst,                   // low level active
+             input wire rst,                   // active high
              input wire [AM_WIDTH-1:0] am,     // input amplitude
              output reg pwm = 1'b0);           // output pwm
     

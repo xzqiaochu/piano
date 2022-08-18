@@ -2,15 +2,13 @@ module div (input wire clk,
             input wire rst,
             input wire [31:0] m,
             input wire [31:0] n,
-            output reg [31:0] ans);
+            output reg [31:0] ans = 0);
     
     reg [31:0] last_m    = 0;
     reg [31:0] last_n    = 0;
     reg [31:0] m_cache   = 0;
     reg [31:0] n_cache   = 0;
     reg [31:0] ans_cache = 0;
-    
-    initial ans = 0;
     
     always @(posedge clk or posedge rst) begin
         if (rst) begin
