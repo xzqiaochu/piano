@@ -1,6 +1,7 @@
 /*
 !/.gitignore
 !README.md
+!/README.assets
 !/piano.lpf
 !/src/
 music.mem
