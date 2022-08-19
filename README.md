@@ -8,7 +8,7 @@
 
 下图为使用我的程序后各模块的功能：
 
-![image-20220818135748330](README.assets/image-20220818135748330.png)
+![img](README.assets/86CEEED37ECD5894EBD2FA0AF39A095E.jpg)
 
 ### 方法一：上传.jed文件
 
