@@ -391,13 +391,9 @@ endmodule
 ![notes](README.assets/notes.gif)
 
 在控制发生的时候，需要根据MIDI编码获取相应的频率，转化公式参考这篇文章：https://www.jianshu.com/p/8f40844a6ff3 ，公式为：
-$$
-f = c0 * (\sqrt[12]{2}) ^ {noteid}
-$$
+$$ f = c0 * (\sqrt[12]{2}) ^ {noteid} $$
 其中
-$$
-c0 \approx 8.18 Hz
-$$
+$$ c0 \approx 8.18 Hz $$
 因为涉及乘幂运算，这里我将其转化为时序逻辑完成：
 
 ```verilog
